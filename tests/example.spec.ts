@@ -12,7 +12,7 @@ test('homepage has header', async ({ page }) => {
 test('click link on homepage', async ({ page }) => {
   await page.goto('https://createfuture.com/');
 
-  await page.getByText('Lets talk').click();
+  await page.getByRole('button', { name: 'link-as-button midnight'}).click
 
-  await expect(page.getByText('Lets talk action')).toBeVisible();
+  await expect(page.getByText('Get in touch')).toBeVisible();
 });
