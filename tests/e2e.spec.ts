@@ -16,3 +16,12 @@ test('click link on homepage', async ({ page }) => {
 
   await expect(page.getByText('Get in touch')).toBeVisible();
 });
+
+//find an image
+test('check background image', async ({ page }) => {
+  await page.goto('https://createfuture.com/about/');
+
+  const aboutImage = page.locator('.background-image')
+
+  await expect(aboutImage).toBeVisible();
+});
