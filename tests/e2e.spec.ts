@@ -43,3 +43,12 @@ test('find image by alt text', async ({ page }) => {
   await expect(page.getByAltText('Adidas user testing')).toBeVisible;
 });
 
+//negative test of contact fields
+test('incomplete contact', async ({ page }) => {
+  await page.goto('https://createfuture.com/contact/');
+  await page.locator('iframe[title="Form 0"]').contentFrame().getByPlaceholder('First name', { exact: true }).click();
+  await page.locator('iframe[title="Form 0"]').contentFrame().getByPlaceholder('First name', { exact: true }).fill('max');
+  await page.getByRole('button', { name: 'hs-button primary'}).click;
+  await expect(page.getByText('Please complete all required fields.')).toBeVisible;
+});
+
