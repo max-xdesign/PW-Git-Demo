@@ -1,5 +1,6 @@
 import { test, expect } from '@playwright/test';
 
+//Note: chose text as no IDS
 
 // finding text on the home page
 test('homepage has header', async ({ page }) => {
@@ -44,6 +45,7 @@ test('find image by alt text', async ({ page }) => {
 });
 
 //negative test of contact fields
+//cover why i have used iframe locator
 test('incomplete contact', async ({ page }) => {
   await page.goto('https://createfuture.com/contact/');
   await page.locator('iframe[title="Form 0"]').contentFrame().getByPlaceholder('First name', { exact: true }).click();
