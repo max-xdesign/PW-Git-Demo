@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-//Note: chose text as no IDS
+//Note: chose getByRole or getByText as no IDS available for most tests
 
 // finding text on the home page
 test('homepage has header', async ({ page }) => {
@@ -19,6 +19,7 @@ test('click link on homepage', async ({ page }) => {
 });
 
 //find a missing image on the about page without alt text
+// - no other locator options were available for this image
 test('check background image', async ({ page }) => {
   await page.goto('https://createfuture.com/about/');
 
@@ -45,8 +46,8 @@ test('find image by alt text', async ({ page }) => {
 });
 
 //negative test of contact fields
-//cover why i have used iframe locator
-test('incomplete contact', async ({ page }) => {
+// - used iframe as the other locator methods would not find the element
+test('incomplete contact form entry', async ({ page }) => {
   await page.goto('https://createfuture.com/contact/');
   await page.locator('iframe[title="Form 0"]').contentFrame().getByPlaceholder('First name', { exact: true }).click();
   await page.locator('iframe[title="Form 0"]').contentFrame().getByPlaceholder('First name', { exact: true }).fill('max');
