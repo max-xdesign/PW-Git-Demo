@@ -5,16 +5,13 @@ import { test, expect } from '@playwright/test';
 // finding text on the home page
 test('homepage has header', async ({ page }) => {
   await page.goto('https://createfuture.com/');
-
   await expect(page.getByText('So, what are we ')).toBeVisible();
 });
 
 //click on a link to arrive at contact page
 test('click link on homepage', async ({ page }) => {
   await page.goto('https://createfuture.com/');
-
   await page.getByRole('button', { name: 'link-as-button midnight'}).click
-
   await expect(page.getByText('Get in touch')).toBeVisible();
 });
 
@@ -22,9 +19,7 @@ test('click link on homepage', async ({ page }) => {
 // - no other locator options were available for this image
 test('check background image', async ({ page }) => {
   await page.goto('https://createfuture.com/about/');
-
   const aboutImage = page.locator('.background-image')
-
   await expect(aboutImage).toBeVisible();
 });
 
@@ -33,7 +28,6 @@ test('check background image', async ({ page }) => {
 test('Dropdown navigation test', async ({ page }) => {
   await page.goto('https://createfuture.com/');
   await page.getByRole('menuitem', { name: 'Our Services'}).hover();
-  //await expect(page.getByRole('menuitem', { name: 'Data and AI'})).toBeVisible;
   await page.getByRole('menuitem', { name: 'Data & AI' }).click();
   await expect(page.getByRole('heading').getByText('Data and AI', { exact: true})).toBeVisible();
 });
