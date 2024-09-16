@@ -35,7 +35,7 @@ test('Dropdown navigation test', async ({ page }) => {
   await page.getByRole('menuitem', { name: 'Our Services'}).hover();
   //await expect(page.getByRole('menuitem', { name: 'Data and AI'})).toBeVisible;
   await page.getByRole('menuitem', { name: 'Data & AI' }).click();
-  await expect(page.getByText('Data and AI')).toBeVisible;
+  await expect(page.getByRole('heading').getByText('Data and AI', { exact: true})).toBeVisible();
 });
 
 //find an image on a case study using alt text
@@ -47,12 +47,12 @@ test('find image by alt text', async ({ page }) => {
 });
 
 //negative test of contact fields
-// - used iframe as the other locator methods would not find the element
+// - used iframe as the other locator methods would not find the element without first being inside the content frame
 test('incomplete contact form entry', async ({ page }) => {
   await page.goto('https://createfuture.com/contact/');
   await page.locator('iframe[title="Form 0"]').contentFrame().getByPlaceholder('First name', { exact: true }).click();
   await page.locator('iframe[title="Form 0"]').contentFrame().getByPlaceholder('First name', { exact: true }).fill('max');
-  await page.getByRole('button', { name: 'hs-button primary'}).click;
-  await expect(page.getByText('Please complete all required fields.')).toBeVisible;
+  await page.locator('iframe[title="Form 0"]').contentFrame().getByRole('button', { name: 'Send your message' }).click();
+  await expect(page.locator('iframe[title="Form 0"]').contentFrame().getByText('Please complete all required')).toBeVisible();
 });
 
