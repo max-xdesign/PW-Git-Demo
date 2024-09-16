@@ -32,17 +32,18 @@ test('check background image', async ({ page }) => {
 //test dropdown elements to visit Services Page
 test('Dropdown navigation test', async ({ page }) => {
   await page.goto('https://createfuture.com/');
-  await page.getByRole('link', { name: 'Our Services'}).hover();
-  await page.getByRole('link', { name: 'Data and AI' }).click();
+  await page.getByRole('menuitem', { name: 'Our Services'}).hover();
+  //await expect(page.getByRole('menuitem', { name: 'Data and AI'})).toBeVisible;
+  await page.getByRole('menuitem', { name: 'Data & AI' }).click();
   await expect(page.getByText('Data and AI')).toBeVisible;
 });
 
 //find an image on a case study using alt text
 test('find image by alt text', async ({ page }) => {
   await page.goto('https://createfuture.com/');
-  await page.getByRole('link', { name: 'Our Experience'}).hover();
-  await page.getByRole('link', { name: 'adidas' }).click();
-  await expect(page.getByAltText('Adidas user testing')).toBeVisible;
+  await page.getByRole('menuitem', { name: 'our experience'}).hover();
+  await page.getByRole('menuitem', { name: 'adidas' }).click();
+  await expect(page.getByAltText('ADDSCS_user_testing')).toBeVisible();
 });
 
 //negative test of contact fields
